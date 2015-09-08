@@ -1,0 +1,26 @@
+.hero
+  .row.section
+    .large-offset-7.large-5.columns.hero-title
+      .title.thin
+        Learn Virtually
+        .thick anywhere
+      .sub-title.thin professional and organized lecture notes for your class
+
+.hero2
+  .row.section
+    .large-6.columns.hero-title
+      .sub-title.thin= link_to "latest courses", courses_path
+  
+
+//Replace this area with actual classes once implemented
+
+
+
+.hero3
+  - @courses.each_slice(3).to_a.each do |group|
+    .row.section
+      - group.each do |course|
+        .large-4.columns
+          .card
+            .card-title.thick=link_to course.name, course_topics_path(course)
+            .card-sub-title= course.university

@@ -1,0 +1,37 @@
+<div class="topics-slider">
+  <div class="row slider-head">
+     <h3><%= @course.name %></h3>
+    <p><%= @course.description %></p>
+	<% if @subtopics.present? %>
+	<% @firstSubtopic = @subtopics.first.id %>
+	<% end %>
+  </div>
+<div class="slide-left-block">
+<ul class="slide-left">
+  <li class="heading">
+   <a class="back-arrow" href="<%= course_topics_path(@course) %>"><%= image_tag('site/back-24.png') %></a> <a href="javascript:void(0);" class="menuitem"> <%= @topic.name %></a>
+  </li>
+  <% @subtopics.each do |subtopic| %>
+      <li class="sub-heading">
+        <a class="menuitem" subtopicid = "<%= subtopic.id %>" href="javascript:void(0);"> <%= subtopic.name%></a>
+      </li>
+  <% end %>
+</ul>
+</div>
+<div class="slide-right-block">
+<div class="content">
+</div>
+</div>
+</div>
+<script>
+$(".menuitem").click(function() {
+	$(".menuitem").removeClass('active');
+	$(this).addClass('active');
+    var subtopicId = $(this).attr('subtopicid');
+    $(".slide-right-block .content").load('/topics/slidebox/'+subtopicId);
+
+});
+$(document).ready(function(){
+    $(".slide-right-block .content").load('/topics/slidebox/'+<%= @firstSubtopic%>);
+});
+</script>
